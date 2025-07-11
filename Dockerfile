@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     iputils-ping \
     telnet \
     curl \
@@ -14,9 +14,7 @@ RUN apt update && apt install -y --no-install-recommends \
     traceroute \
     vim \
     less \
-    && apt clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Evitar usar root explícito, trabajar con usuario arbitrario
-# No especificamos USER para dejar que OpenShift asigne
+CMD ["bash", "-c", "while true; do sleep 3600; done"]
 
-CMD ["/bin/bash"]
